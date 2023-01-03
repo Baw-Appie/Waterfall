@@ -1,0 +1,22 @@
+From d386e97512748e576ce895a092585ad8ce55146e Mon Sep 17 00:00:00 2001
+From: Baw-Appie <pp121324@gmail.com>
+Date: Wed, 4 Jan 2023 00:55:02 +0900
+Subject: [PATCH] Change host length
+
+
+diff --git a/protocol/src/main/java/net/md_5/bungee/protocol/packet/Handshake.java b/protocol/src/main/java/net/md_5/bungee/protocol/packet/Handshake.java
+index 7dbbfd3c..3dce04f3 100644
+--- a/protocol/src/main/java/net/md_5/bungee/protocol/packet/Handshake.java
++++ b/protocol/src/main/java/net/md_5/bungee/protocol/packet/Handshake.java
+@@ -24,7 +24,7 @@ public class Handshake extends DefinedPacket
+     public void read(ByteBuf buf)
+     {
+         protocolVersion = readVarInt( buf );
+-        host = readString( buf, 255 );
++        host = readString( buf, Short.MAX_VALUE );
+         port = buf.readUnsignedShort();
+         requestedProtocol = readVarInt( buf );
+     }
+-- 
+2.37.0 (Apple Git-136)
+
