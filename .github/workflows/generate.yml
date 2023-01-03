@@ -1,4 +1,4 @@
-name: Build Waterfall
+name: Generate Waterfall
 on:
   push:
     branches:
