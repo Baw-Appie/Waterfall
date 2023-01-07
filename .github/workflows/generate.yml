@@ -1,0 +1,30 @@
+name: Generate Waterfall
+on:
+  push:
+    branches:
+      - HostLengthPatch
+      - actions #temp
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [17,8]
+      fail-fast: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Java ${{ matrix.java }}
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'adopt'
+      - name: build
+        run: |
+          git config --global user.email "no-reply@github.com"
+          git config --global user.name "Github Actions"
+          ./waterfall b
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v3.1.1
+        with:
+          name: Waterfall.jar
+          path: Waterfall-Proxy/bootstrap/target/Waterfall.jar
